@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>数字化家书 - 互动祝福版</title>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .message {
+            position: absolute;
+            left: 100%;
+            white - space: nowrap;
+            animation: scrollLeft 10s linear infinite;
+        }
+
+        @keyframes scrollLeft {
+            from {
+                legt: 100%;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+    .nav-btn {
+    position: fixed;
+    padding: 12px 24px;
+    background: #5A3E36;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: '微软雅黑';
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    z-index: 999;
+}
+
+.nav-btn:hover {
+    background: #FFE4E1;
+    transform: translateY(-2px);
+}
+@media (max-width: 480px) {
+    .nav-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+        /* 基础样式 */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            font-family: '微软雅黑', cursive;
+            overflow: hidden;
+        }
+
+        /* 烟花背景效果 */
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff0;
+            border-radius: 50%;
+            animation: firework 1.5s infinite;
+        }
+
+        @keyframes firework {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* 容器样式 */
+        #container {
+            width: 800px;
+            height: 500px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            background-image: url(img/bg1.jpg);
+            background-size: cover; /* 让背景图片覆盖整个div */
+            background-position: center; /* 背景图片居中 */
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255, 223, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* 礼物图标样式 */
+        .gift {
+            position: absolute;
+            width: 80px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gift:hover {
+            transform: scale(1.1);
+        }
+
+        /* 祝福语样式 */
+        .blessing {
+            position: absolute;
+            background: rgba(255, 240, 220, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+            max-width: 200px;
+            text-align: center;
+            font-size: 18px;
+            color: #5a3e36;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 其他原有样式保持不变 */
+        /* [原有照片、书信内容等样式代码] */
+    </style>
+</head>
+<body>
+    <!-- 烟花背景 -->
+    <div class="firework" style="left: 20%"></div>
+    <div class="firework" style="left: 50%"></div>
+    <div class="firework" style="left: 80%"></div>
+
+    <div id="container">
+        <!-- 礼物图标 -->
+        <img src="img/gift1.png" class="gift" style="left: 15%; bottom: 10%" data-blessing="愿幸福常伴您左右！">
+        <img src="img/gift2.png" class="gift" style="left: 45%; bottom: 10%" data-blessing="健康平安永相随！">
+        <img src="img/gift3.png" class="gift" style="left: 75%; bottom: 10%" data-blessing="天天都有好心情！">
+
+        <!-- 原有书信内容 -->
+        <!-- [原有照片、书信内容代码保持不变] -->
+        <script>
+        const inspirationalSentences = [
+        "高尔基：世界上的一切光荣和骄傲，都来自母亲。",
+            "塞万提斯：父亲的德行是儿子最好的遗产。",
+            "爱默生：家庭是父亲的王国，母亲的世界，儿童的乐园",
+            "雨果：慈母的胳膊是慈爱构成的，孩子睡在里面怎能不甜？",
+            "米尔：母爱是世间最伟大的力量。",
+      
+        ];
+        let currentIndex = 0;
+        function addMessageToContainer() {
+            if (currentIndex < inspirationalSentences.length) {
+                const message = inspirationalSentences[currentIndex];
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.className ='message';
+                // 这里简单设置垂直位置，根据索引来调整，可优化
+                messageElement.style.top = currentIndex * 30 + 'px';
+                document.getElementById('container').appendChild(messageElement);
+                currentIndex++;
+                setTimeout(addMessageToContainer, 3000);
+            }
+        }
+        addMessageToContainer();
+    </script>
+        <script>
+            // 礼物点击事件
+            document.querySelectorAll('.gift').forEach(gift => {
+                gift.addEventListener('click', function(e) {
+                    // 移除已有的祝福语
+                    document.querySelectorAll('.blessing').forEach(el => el.remove());
+                    
+                    // 创建祝福语元素
+                    const blessing = document.createElement('div');
+                    blessing.className = 'blessing';
+                    blessing.textContent = this.dataset.blessing;
+                    
+                    // 定位祝福语
+                    const rect = this.getBoundingClientRect();
+                    blessing.style.left = `${rect.left - 80}px`;
+                    blessing.style.top = `${rect.top - 100}px`;
+                    
+                    document.body.appendChild(blessing);
+                    
+                    // 5秒后自动消失
+                    setTimeout(() => {
+                        blessing.remove();
+                    }, 5000);
+                });
+            });
+
+            // 自动生成烟花
+            setInterval(() => {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + '%';
+                document.body.appendChild(firework);
+                
+                setTimeout(() => firework.remove(), 1500);
+            }, 300);
+
+            // 原有文字动画和音乐控制代码保持不变
+        </script>
+    </div>
+    
+    <button class="nav-btn" style="right: 20px; bottom: 20px;" onclick="window.location.href='index.html'">
+    返回书信 ←
+</button>
+</body>
+</html>

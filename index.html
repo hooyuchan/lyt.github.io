@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>数字化书信 - 致家人的爱</title>
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    .nav-btn {
-    position: fixed;
-    padding: 12px 24px;
-    background: #5A3E36;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-family: '微软雅黑';
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-    z-index: 999;
-}
+        .nav-btn {
+            position: fixed;
+            padding: 12px 24px;
+            background: #5A3E36;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: '微软雅黑';
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 999;
+        }
 
-.nav-btn:hover {
-    background: #FFE4E1;
-    transform: translateY(-2px);
-}
-@media (max-width: 480px) {
-    .nav-btn {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-}
+        .nav-btn:hover {
+            background: #FFE4E1;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
         body {
             margin: 0;
             height: 100vh;
@@ -39,6 +42,7 @@
             background: #f0f0f0;
             font-family: '微软雅黑', cursive;
         }
+
         #container {
             width: 800px;
             height: 500px;
@@ -46,8 +50,9 @@
             overflow: hidden;
             background: linear-gradient(45deg, #ffe4e1, #fff5ee);
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
         .photo {
             position: absolute;
             width: 200px;
@@ -56,10 +61,22 @@
             opacity: 0;
             animation: photoFade 8s infinite;
         }
+
         @keyframes photoFade {
-            0%, 100% { opacity: 0; transform: scale(0.8); }
-            20%, 80% { opacity: 1; transform: scale(1); }
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            20%,
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
+
         #letter {
             position: absolute;
             top: 50%;
@@ -69,33 +86,48 @@
             padding: 20px;
             color: #5a3e36;
         }
+
         #text {
             font-size: 24px;
             line-height: 1.6;
             background-color: rgba(255, 255, 255, 0.5);
-            color: black; /* 文字颜色 */
-          padding: 10px; /* 内边距，使文字看起来不那么拥挤 */
-  border-radius: 5px; /* 可选：圆角边框 */
+            color: black;
+            /* 文字颜色 */
+            padding: 10px;
+            /* 内边距，使文字看起来不那么拥挤 */
+            border-radius: 5px;
+            min-width: 300px;
+            /* 可选：圆角边框 */
             opacity: 0;
             animation: textAppear 12s linear forwards;
         }
+
         @keyframes textAppear {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="container">
         <!-- 家庭照片动画 -->
-        <img src="img/family1.jpeg" class="photo" style="left: 10%; top: 10%; animation-delay: 0s">
-        <img src="img/family2.jpeg" class="photo" style="left: 60%; top: 30%; animation-delay: 2s">
+        <img src="img/family1.jpg" class="photo" style="left: 10%; top: 10%; animation-delay: 0s">
+        <img src="img/family2.jpg" class="photo" style="left: 60%; top: 30%; animation-delay: 2s">
         <img src="img/family3.jpg" class="photo" style="left: 30%; top: 60%; animation-delay: 4s">
-        
+
         <!-- 书信内容 -->
         <div id="letter">
-            <div id="text" >
+            <div id="text">
                 亲爱的爸爸妈妈，
                 感谢你们一直以来的陪伴与付出。
                 每一个微笑、每一句鼓励，
@@ -105,16 +137,16 @@
                 —— 爱你们的孩子
             </div>
         </div>
-        
+
         <!-- 背景音乐 -->
         <audio id="bgMusic" autoplay loop>
             <source src="img/canon.mp3" type="audio/mp3">
         </audio>
     </div>
-    
+
     <button class="nav-btn" style="right: 20px; bottom: 20px;" onclick="window.location.href='blessing.html'">
-    献上真挚的祝福 →
-</button>
+        献上真挚的祝福 →
+    </button>
 
     <script>
         // 控制文字逐字显示（可选）
@@ -131,6 +163,7 @@
         }
         typeText();
     </script>
-    
+
 </body>
+
 </html>
